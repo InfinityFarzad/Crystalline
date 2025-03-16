@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": {
+      "item": "minecraft:heart_of_the_sea"
+    },
+    "R": {
+      "item": "minecraft:netherite_sword"
+    },
+    "S": {
+      "item": "minecraft:amethyst_block"
+    },
+    "V": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "pattern": [
+    " VV",
+    "SHV",
+    "RS "
+  ],
+  "result": {
+    "count": 1,
+    "id": "crystalline:the_divider"
+  }
+}

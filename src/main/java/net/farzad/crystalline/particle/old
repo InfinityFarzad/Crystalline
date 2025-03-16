@@ -1,0 +1,125 @@
+package net.farzad.crystalline.particle;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.particle.*;
+import net.minecraft.client.render.Camera;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.world.ClientWorld;
+import net.minecraft.particle.SimpleParticleType;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import org.joml.Quaternionf;
+
+
+public class AmethystShineParticle extends SpriteBillboardParticle {
+    private final SpriteProvider spriteProvider;
+    /*private int rotata = 0;*/
+    private float rotationAngle = 0;
+    AmethystShineParticle(ClientWorld world, double x, double y, double z, double d, SpriteProvider spriteProvider) {
+        super(world, x, y, z, 0.0, 0.0, 0.0);
+        this.spriteProvider = spriteProvider;
+        this.maxAge = 590;
+        float f = this.random.nextFloat() * 0.6F + 0.4F;
+        this.red = f;
+        this.green = f;
+        this.blue = f;
+        this.scale = 1.0F - (float) d * 0.5F;
+        this.angle = 5;
+        this.setSpriteForAge(spriteProvider);
+
+    }
+
+/*    @Override
+    public Rotator getRotator() {
+        return super.getRotator();
+    }
+
+    @Override
+    protected void method_60373(VertexConsumer vertexConsumer, Camera camera, Quaternionf quaternionf, float f) {
+        Vec3d vec3d = camera.getPos();
+        float g = (float) (MathHelper.lerp((double) f, this.prevPosX, this.x) - vec3d.getX());
+        float h = (float) (MathHelper.lerp((double) f, this.prevPosY, this.y) - vec3d.getY());
+        float i = (float) (MathHelper.lerp((double) f, this.prevPosZ, this.z) - vec3d.getZ());
+        Quaternionf rotation = new Quaternionf();
+
+        rotation.rotateY((float) Math.toRadians(rotata));
+
+
+
+        this.method_60374(vertexConsumer, rotation, g, h, i, f);
+        this.method_60374(vertexConsumer, rotation.rotateY((float) Math.PI), g, h, i, f);
+    }*/
+
+    @Override
+    public int getBrightness(float tint) {
+        return 15728880;
+    }
+
+/*    @Override
+    public void tick() {
+        this.prevPosX = this.x;
+        this.prevPosY = this.y;
+        this.prevPosZ = this.z;
+
+        if (this.age++ >= this.maxAge) {
+            this.markDead();
+        } else {
+            this.setSpriteForAge(this.spriteProvider);
+            rotata += 1;
+        }
+    }*/
+
+    @Override
+    protected void method_60373(VertexConsumer vertexConsumer, Camera camera, Quaternionf quaternionf, float f) {
+        Vec3d vec3d = camera.getPos();
+        float g = (float)(MathHelper.lerp((double)f, this.prevPosX, this.x) - vec3d.getX());
+        float h = (float)(MathHelper.lerp((double)f, this.prevPosY, this.y) - vec3d.getY());
+        float i = (float)(MathHelper.lerp((double)f, this.prevPosZ, this.z) - vec3d.getZ());
+
+
+        Quaternionf rotation = new Quaternionf();
+        camera.getRotation().invert(rotation);
+
+
+        rotation.rotateZ((float) Math.toRadians(rotationAngle));
+        rotation.rotateY((float) Math.toRadians(h));
+        rotation.rotateX((float) Math.toRadians(g));
+
+        this.method_60374(vertexConsumer, rotation, g, h, i, f);
+    }
+
+
+
+    @Override
+    public void tick() {
+        this.prevPosX = this.x;
+        this.prevPosY = this.y;
+        this.prevPosZ = this.z;
+
+        if (this.age++ >= this.maxAge) {
+            this.markDead();
+        } else {
+            this.setSpriteForAge(this.spriteProvider);
+            rotationAngle += 5; // Adjust spin speed
+        }
+    }
+
+    @Override
+    public ParticleTextureSheet getType() {
+        return ParticleTextureSheet.PARTICLE_SHEET_LIT;
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static class Factory implements ParticleFactory<SimpleParticleType> {
+        private final SpriteProvider spriteProvider;
+
+        public Factory(SpriteProvider spriteProvider) {
+            this.spriteProvider = spriteProvider;
+        }
+
+        public Particle createParticle(SimpleParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+            return new AmethystShineParticle(clientWorld, d, e, f, g, this.spriteProvider);
+        }
+    }
+}

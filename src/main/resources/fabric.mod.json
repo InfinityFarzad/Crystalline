@@ -1,0 +1,44 @@
+{
+	"schemaVersion": 1,
+	"id": "crystalline",
+	"version": "1.21.1_1.1.5b",
+	"name": "Crystalline",
+	"description": "A mod that adds, weapons and building blocks! ",
+	"authors": [
+		"InfinityFarzad - Developer",
+		"Juko - Artist",
+		"GitGilev - Bug tester"
+
+
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/crystalline",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "ARR",
+	"icon": "assets/crystalline/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.farzad.crystalline.Crystalline"
+		],
+		"fabric-datagen": [
+			"net.farzad.crystalline.CrystallineDataGenerator"
+		],
+		"client": [
+			"net.farzad.crystalline.CrystallineClient"
+		]
+	},
+	"mixins": [
+		"crystalline.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.9",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

@@ -1,0 +1,24 @@
+{
+  "item.crystalline.the_divider": "The Divider",
+  "item.crystalline.the_crusher": "The Crusher",
+  "enchantment.crystalline.amethyst_rain": "Amethyst Rain",
+  "enchantment.crystalline.shatter_sweep": "Shatter Sweep",
+  "death.attack.amethyst_shard": "%1$s was struck in the chest by %2$s's",
+  "enchantment.crystalline.amethyst_rain.desc":"When at full charge, releases a giant sphere wave of amethyst shards in all directions",
+  "enchantment.crystalline.shatter_sweep.desc":"Replaces the 1 shard with a sweep wave of shards",
+  "block.crystalline.amethyst_brick": "Amethyst Brick",
+  "block.crystalline.amethyst_brick_slab": "Amethyst Brick Slab",
+  "block.crystalline.amethyst_brick_stairs": "Amethyst Brick Stairs",
+  "block.crystalline.amethyst_brick_wall": "Amethyst Brick Wall",
+  "block.crystalline.amethyst_brick_pressure_plate": "Amethyst Brick Pressure Plate",
+  "block.crystalline.amethyst_brick_button": "Amethyst Brick Button",
+
+  "block.crystalline.amethyst_pillar": "Amethyst Pillar",
+
+  "block.crystalline.amethyst_slab": "Amethyst Slab",
+  "block.crystalline.amethyst_stairs": "Amethyst Stairs",
+  "block.crystalline.amethyst_wall": "Amethyst Wall",
+  "block.crystalline.amethyst_pressure_plate": "Amethyst Pressure Plate",
+  "block.crystalline.amethyst_button": "Amethyst Button",
+  "block.crystalline.amethyst_lamp": "Amethyst Lamp"
+}
