@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "crystalline:block/amethyst_pillar_top",
+    "side": "crystalline:block/amethyst_pillar_side"
+  }
+}

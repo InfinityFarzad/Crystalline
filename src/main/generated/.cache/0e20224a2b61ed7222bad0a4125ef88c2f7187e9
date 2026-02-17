@@ -1,0 +1,7 @@
+// 1.21.5	-999999999-01-01T00:00:00	Crystalline/Tags for minecraft:block
+25dce7081b721eb5e9156b5731637f25fcd97161 data/minecraft/tags/block/buttons.json
+58826f7cabbdc31b6bdc511f7e7fc53116be5932 data/minecraft/tags/block/mineable/pickaxe.json
+f07084a471a8e33cbc743dcab9c26d9242c731cd data/minecraft/tags/block/pressure_plates.json
+e54844ac3ab3e53619850cf1507f8ac4ecc058a4 data/minecraft/tags/block/slabs.json
+248a1e78aeb2880cd7020d5a9528d4d318148def data/minecraft/tags/block/stairs.json
+534b5cc5848ab5e4a58739db9626cdadc4ed55c7 data/minecraft/tags/block/walls.json

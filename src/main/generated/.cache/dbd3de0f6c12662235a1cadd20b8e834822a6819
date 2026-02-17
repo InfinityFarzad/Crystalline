@@ -1,0 +1,8 @@
+// 1.21.5	-999999999-01-01T00:00:00	Crystalline/Block Loot Tables
+5433bb8552d5617fd695e3570f3f26c56cc3d66e data/crystalline/loot_table/blocks/amethyst_brick_button.json
+1b5285dba331b7f76e7bdd6d94068e6ae065a068 data/crystalline/loot_table/blocks/amethyst_brick_pressure_plate.json
+9efc1a95b98a7212ae64f39ddd2f81a804a284a4 data/crystalline/loot_table/blocks/amethyst_brick_slab.json
+7baecd52adf18ff42f81130707a7df1ee26227ba data/crystalline/loot_table/blocks/amethyst_brick_stairs.json
+3a114226e185786bc0bc666573e4274dd99ea680 data/crystalline/loot_table/blocks/amethyst_bricks.json
+d11731a9a40a634c52ec9462b9046151c7fec17e data/crystalline/loot_table/blocks/amethyst_lamp.json
+0b6636db28b38091ee3f809b884935dcce7209e2 data/crystalline/loot_table/blocks/amethyst_pillar.json

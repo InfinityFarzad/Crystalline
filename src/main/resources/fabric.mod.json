@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "crystalline",
+	"version": "${version}",
+	"name": "Crystalline",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "ARR",
+	"icon": "assets/crystalline/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "net.farzad.crystalline.common.Crystalline"
+		],
+		"fabric-datagen": [
+			"net.farzad.crystalline.CrystallineDataGenerator"
+		],
+		"client": [
+          "net.farzad.crystalline.client.CrystallineClient"
+		]
+	},
+	"mixins": [
+		"crystalline.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.14",
+		"minecraft": "~1.21.5",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

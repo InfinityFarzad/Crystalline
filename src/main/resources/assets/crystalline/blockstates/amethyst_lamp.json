@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "lit=false,powered=false": {
+      "model": "crystalline:block/amethyst_lamp"
+    },
+    "lit=false,powered=true": {
+      "model": "crystalline:block/amethyst_lamp"
+    },
+    "lit=true,powered=false": {
+      "model": "crystalline:block/amethyst_lamp_on"
+    },
+    "lit=true,powered=true": {
+      "model": "crystalline:block/amethyst_lamp_on"
+    }
+  }
+}

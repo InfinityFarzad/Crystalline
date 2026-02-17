@@ -1,0 +1,126 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "minecraft:display_context",
+    "cases": [
+      {
+        "when": [
+          "firstperson_righthand",
+          "firstperson_lefthand",
+          "thirdperson_righthand",
+          "thirdperson_lefthand",
+          "head"
+        ],
+        "model": {
+          "type": "minecraft:select",
+          "property": "crystalline:divider_heart",
+          "cases": [
+            {
+              "when": "none",
+              "model": {
+                "type": "minecraft:model",
+                "model": "crystalline:item/divider_handheld"
+              }
+            },
+            {
+              "when": "crystal_core",
+              "model": {
+                "type": "minecraft:model",
+                "model": "crystalline:item/divider_crystal_core_handheld"
+              }
+            },
+            {
+              "when": "crystal_heart",
+              "model": {
+                "type": "minecraft:model",
+                "model": "crystalline:item/divider_crystal_heart_handheld"
+              }
+            },
+            {
+              "when": "heart_of_the_sea",
+              "model": {
+                "type": "minecraft:model",
+                "model": "crystalline:item/divider_hots_handheld"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "when": [
+          "gui",
+          "head",
+          "ground"
+        ],
+        "model": {
+          "type": "minecraft:select",
+          "property": "crystalline:divider_heart",
+          "cases": [
+            {
+              "when": "none",
+              "model": {
+                "type": "minecraft:model",
+                "model": "crystalline:item/divider"
+              }
+            },
+            {
+              "when": "crystal_core",
+              "model": {
+                "type": "minecraft:model",
+                "model": "crystalline:item/divider_crystal_core"
+              }
+            },
+            {
+              "when": "crystal_heart",
+              "model": {
+                "type": "minecraft:model",
+                "model": "crystalline:item/divider_crystal_heart"
+              }
+            },
+            {
+              "when": "heart_of_the_sea",
+              "model": {
+                "type": "minecraft:model",
+                "model": "crystalline:item/divider_hots"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:select",
+      "property": "crystalline:divider_heart",
+      "cases": [
+        {
+          "when": "none",
+          "model": {
+            "type": "minecraft:model",
+            "model": "crystalline:item/divider"
+          }
+        },
+        {
+          "when": "crystal_core",
+          "model": {
+            "type": "minecraft:model",
+            "model": "crystalline:item/divider_crystal_core"
+          }
+        },
+        {
+          "when": "crystal_heart",
+          "model": {
+            "type": "minecraft:model",
+            "model": "crystalline:item/divider_crystal_heart"
+          }
+        },
+        {
+          "when": "heart_of_the_sea",
+          "model": {
+            "type": "minecraft:model",
+            "model": "crystalline:item/divider_hots"
+          }
+        }
+      ]
+    }
+  }
+}
