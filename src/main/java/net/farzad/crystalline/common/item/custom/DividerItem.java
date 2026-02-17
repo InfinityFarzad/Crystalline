@@ -44,7 +44,7 @@ import java.util.List;
 
 public class DividerItem extends SingleSlotAbilityItem {
 
-    public static final List<DividerAbilityTypes> types = List.of(DividerAbilityTypes.CRYSTAL_HEART,DividerAbilityTypes.CRYSTAL_HEART,DividerAbilityTypes.HEART_OF_THE_SEA);
+    public static final List<DividerAbilityTypes> types = List.of(DividerAbilityTypes.CRYSTAL_HEART,DividerAbilityTypes.AMETHYST_RAIN,DividerAbilityTypes.HEART_OF_THE_SEA);
 
 
     public DividerItem(Settings settings, float attackDamage, float attackSpeed, double reach) {
