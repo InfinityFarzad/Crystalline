@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": [
+      "minecraft:amethyst_shard"
+    ],
+    "G": [
+      "minecraft:netherite_sword"
+    ],
+    "O": [
+      "minecraft:obsidian"
+    ]
+  },
+  "pattern": [
+    " AA",
+    "AOA",
+    "GA "
+  ],
+  "result": {
+    "count": 1,
+    "id": "crystalline:divider"
+  },
+  "show_notification": false
+}

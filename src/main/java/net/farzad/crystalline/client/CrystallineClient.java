@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.farzad.crystalline.client.item.DividerHeartProperty;
+import net.farzad.crystalline.client.render.entity.CrystalCoreEntityRenderer;
 import net.farzad.crystalline.common.Crystalline;
 import net.farzad.crystalline.common.entity.ModEntities;
 import net.farzad.crystalline.client.render.entity.AmethystShardProjectileEntityModel;
@@ -41,6 +42,9 @@ public class CrystallineClient implements ClientModInitializer {
         });
         EntityModelLayerRegistry.registerModelLayer(AmethystShardProjectileEntityModel.AMETHYST_SHARD_PROJECTILE,AmethystShardProjectileEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.AMETHYST_SHARD_PROJECTILE_ENTITY, AmethystShardProjectileEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.CRYSTAL_CORE_ENTITY, CrystalCoreEntityRenderer::new);
+
+
         ParticleFactoryRegistry.getInstance().register(ModParticles.AMETHYST_LAMP_PARTICLE, AmethystLampParticle.Factory::new);
         ItemTooltipCallback.EVENT.register((itemStack, tooltipContext, tooltipType, list) -> {
             if (itemStack.isOf(ModItems.DIVIDER)) {
@@ -68,14 +72,14 @@ public class CrystallineClient implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(tick -> {
             if (tick.player != null && spamtonGspamton != null) {
-                var sound = spamtonGspamton;
+
                 if (tick.player.getInventory().containsAny(Set.of(ModItems.CRYSTAL_HEART))) {
-                    if (!tick.getSoundManager().isPlaying(sound)) {
-                        tick.getSoundManager().play(sound);
+                    if (!tick.getSoundManager().isPlaying(spamtonGspamton)) {
+                        tick.getSoundManager().play(spamtonGspamton);
                     }
                 } else {
-                    tick.getSoundManager().stop(sound);
-                    tick.getSoundManager().stopSounds(sound.getId(),tick.player.getSoundCategory());
+                    tick.getSoundManager().stop(spamtonGspamton);
+                    tick.getSoundManager().stopSounds(spamtonGspamton.getId(),tick.player.getSoundCategory());
                 }
             }
         });

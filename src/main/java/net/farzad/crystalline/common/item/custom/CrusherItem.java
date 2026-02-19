@@ -145,7 +145,7 @@ public class CrusherItem extends MaceItem {
                 if (!attacker.getWorld().isClient) {
                     for (int yawOffset = -6 * getBonusCrystal(attacker); yawOffset <= 6; yawOffset++) {
                         for (int pitchOffset = -3 * getBonusCrystal(attacker); pitchOffset <= 3; pitchOffset++) {
-                            AmethystShardProjectileEntity projectile = new AmethystShardProjectileEntity(attacker.getWorld(), (PlayerEntity) attacker);
+                            AmethystShardProjectileEntity projectile = new AmethystShardProjectileEntity(attacker.getWorld(), (PlayerEntity) attacker,false, serverPlayerEntity.getPos());
                             float pitch = -40 + pitchOffset * 20;
                             float yaw = 160 + yawOffset * 20;
                             projectile.setVelocity(attacker, pitch, yaw, 0.0F, 1.5F, 1.0F);

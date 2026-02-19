@@ -9,9 +9,10 @@ import net.minecraft.client.model.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.render.entity.state.ProjectileEntityRenderState;
 import net.minecraft.util.math.MathHelper;
 
-public class AmethystShardProjectileEntityModel extends EntityModel<AmethystShardProjectileEntityRenderState> {
+public class AmethystShardProjectileEntityModel extends EntityModel<ProjectileEntityRenderState> {
 	public static final EntityModelLayer AMETHYST_SHARD_PROJECTILE = new EntityModelLayer(Crystalline.id("amethyst_shard_projectile"), "main");
 
 	public AmethystShardProjectileEntityModel(ModelPart root) {
@@ -27,7 +28,7 @@ public class AmethystShardProjectileEntityModel extends EntityModel<AmethystShar
 		return TexturedModelData.of(modelData, 32, 32);
 	}
 
-	public void setAngles(AmethystShardProjectileEntityRenderState projectileEntityRenderState) {
+	public void setAngles(ProjectileEntityRenderState projectileEntityRenderState) {
 		super.setAngles(projectileEntityRenderState);
 		if (projectileEntityRenderState.shake > 0.0F) {
 			float f = -MathHelper.sin(projectileEntityRenderState.shake * 3.0F) * projectileEntityRenderState.shake;

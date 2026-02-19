@@ -69,7 +69,7 @@ public class PlayerEntityMixin {
                     for (int i = 5; i > 0; i--) {
                         float pitch = player.getPitch() + MathHelper.nextBetween(player.getRandom(),-10.0f,10.0f) * 20;
                         float yaw = player.getYaw() + MathHelper.nextBetween(player.getRandom(),-10.0f,10.0f) * 20;
-                        throwCrystal(player,pitch,yaw,world);
+                        throwCrystal(player,pitch,yaw,world,false, player.getPos());
                     }
 
 

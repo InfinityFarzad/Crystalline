@@ -20,9 +20,9 @@ public class ModDamageTypeTagProvider extends FabricTagProvider<DamageType> {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(DamageTypeTags.IS_PROJECTILE)
-                .addOptional(ModDamageTypes.AMETHYST_SHARD);
+                .addOptional(ModDamageTypes.STRONG_AMETHYST_SHARD).add(ModDamageTypes.STRONG_AMETHYST_SHARD);
         getOrCreateTagBuilder(DamageTypeTags.BYPASSES_ARMOR)
-                .addOptional(ModDamageTypes.AMETHYST_SHARD);
+                .addOptional(ModDamageTypes.STRONG_AMETHYST_SHARD);
         getOrCreateTagBuilder(DamageTypeTags.BYPASSES_COOLDOWN)
                 .addOptional(ModDamageTypes.AMETHYST_SHARD);
 

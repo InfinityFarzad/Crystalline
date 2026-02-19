@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": [
+      "minecraft:amethyst_shard"
+    ],
+    "x": [
+      "minecraft:experience_bottle"
+    ],
+    "r": [
+      "minecraft:rotten_flesh"
+    ],
+    "h": [
+      "minecraft:heart_of_the_sea"
+    ]
+  },
+  "pattern": [
+    "ara",
+    "rhr",
+    "axa"
+  ],
+  "result": {
+    "count": 1,
+    "id": "crystalline:crystal_heart"
+  },
+  "show_notification": false
+}

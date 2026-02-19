@@ -1,6 +1,7 @@
 package net.farzad.crystalline.common;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.farzad.crystalline.block.ModBlocks;
 import net.farzad.crystalline.common.sound.ModSounds;
 import net.farzad.crystalline.common.dataComponents.ModDataComponentTypes;

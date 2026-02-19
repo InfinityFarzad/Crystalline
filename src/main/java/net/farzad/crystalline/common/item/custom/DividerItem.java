@@ -4,7 +4,9 @@ package net.farzad.crystalline.common.item.custom;
 import com.mojang.serialization.Codec;
 import net.farzad.crystalline.common.Crystalline;
 import net.farzad.crystalline.common.dataComponents.ModDataComponentTypes;
+import net.farzad.crystalline.common.entity.ModEntities;
 import net.farzad.crystalline.common.entity.custom.AmethystShardProjectileEntity;
+import net.farzad.crystalline.common.entity.custom.CrystalCoreEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.component.DataComponentTypes;
@@ -37,6 +39,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
@@ -64,9 +67,9 @@ public class DividerItem extends SingleSlotAbilityItem {
                 .build();
     }
 
-    public static void throwCrystal(PlayerEntity user, float pitch, float yaw, World world) {
+    public static void throwCrystal(PlayerEntity user, float pitch, float yaw, World world, boolean ignoreIframes, Vec3d pos) {
         if (!world.isClient) {
-            AmethystShardProjectileEntity amethystShardProjectile = new AmethystShardProjectileEntity(world, user);
+            AmethystShardProjectileEntity amethystShardProjectile = new AmethystShardProjectileEntity(world, user, ignoreIframes, pos);
             amethystShardProjectile.setVelocity(user, pitch, yaw, 0.0F, 1.5F, 1.0F);
             world.spawnEntity(amethystShardProjectile);
         }
@@ -157,7 +160,7 @@ public class DividerItem extends SingleSlotAbilityItem {
                 for (int i = minAttackValue; i <= maxAttackValue; i++) {
                     float d = user.getPitch();
                     float e = user.getYaw();
-                    throwCrystal(user, d, e + i * 5, world);
+                    throwCrystal(user, d, e + i * 5, world, true,user.getPos());
                 }
             }
 
@@ -166,6 +169,9 @@ public class DividerItem extends SingleSlotAbilityItem {
             return ActionResult.CONSUME;
 
         } else if (hasHeart(DividerAbilityTypes.AMETHYST_RAIN,stack)) {
+            CrystalCoreEntity entity = new CrystalCoreEntity(ModEntities.CRYSTAL_CORE_ENTITY,user,user.getPos());
+            entity.setVelocity(user.getRotationVector().multiply(1.4).normalize());
+            world.spawnEntity(entity);
             return ActionResult.PASS;
         } else if (hasHeart(DividerAbilityTypes.CRYSTAL_HEART,stack)) {
             user.setCurrentHand(hand);
