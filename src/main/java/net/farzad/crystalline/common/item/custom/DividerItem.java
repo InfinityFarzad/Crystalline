@@ -140,7 +140,6 @@ public class DividerItem extends SingleSlotAbilityItem {
         ItemStack stack = user.getStackInHand(hand);
         world.playSound(user, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_TRIDENT_HIT, SoundCategory.PLAYERS, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         Random random = world.getRandom();
-        //Crystalline.LOGGER.info(stack.getOrDefault(ModDataComponentTypes.CURRENT_DIVIDER_HEART,ItemStack.EMPTY).toString());
         for (int i = 0; i < 8; ++i) {
             world.addParticleClient(new ItemStackParticleEffect(ParticleTypes.ITEM, new ItemStack(Blocks.AMETHYST_BLOCK, 1)), user.getX() + random.nextGaussian() / 20f, user.getY() + 1 + random.nextGaussian() / 20f, user.getZ() + random.nextGaussian() / 20f, random.nextGaussian() / 20f, 0.2D + random.nextGaussian() / 20f, random.nextGaussian() / 20f);
         }

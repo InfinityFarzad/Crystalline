@@ -1,0 +1,6 @@
+{
+  "heart_beat": {
+    "subtitle": "subtitle.crystalline.heart_beat",
+    "sounds": ["crystalline:heart_beat"]
+  }
+}

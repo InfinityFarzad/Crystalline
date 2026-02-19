@@ -2,6 +2,7 @@ package net.farzad.crystalline.common;
 
 import net.fabricmc.api.ModInitializer;
 import net.farzad.crystalline.block.ModBlocks;
+import net.farzad.crystalline.common.sound.ModSounds;
 import net.farzad.crystalline.common.dataComponents.ModDataComponentTypes;
 import net.farzad.crystalline.common.entity.ModEntities;
 import net.farzad.crystalline.common.item.ModItemGroups;
@@ -28,6 +29,7 @@ public class Crystalline implements ModInitializer {
         ModEntities.init();
         ModParticles.init();
         ModDataComponentTypes.registerDataComponentTypes();
+        ModSounds.init();
         ModItemGroups.init();
     }
 }

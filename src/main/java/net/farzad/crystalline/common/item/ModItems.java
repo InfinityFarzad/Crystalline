@@ -7,6 +7,7 @@ import net.farzad.crystalline.common.dataComponents.ModDataComponentTypes;
 import net.farzad.crystalline.common.item.custom.CrusherItem;
 import net.farzad.crystalline.common.item.custom.DividerHeartItem;
 import net.farzad.crystalline.common.item.custom.DividerItem;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
@@ -34,7 +35,7 @@ public class ModItems {
 
     public static Item register(String name, Function<Item.Settings, Item> itemFactory, Item.Settings settings) {
         RegistryKey<Item> itemKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(Crystalline.MOD_ID, name));
-        Item item = itemFactory.apply(settings.registryKey(itemKey));
+        Item item = itemFactory.apply(settings.registryKey(itemKey).component(DataComponentTypes.TOOLTIP_STYLE,Identifier.ofVanilla("crystal")));
         Registry.register(Registries.ITEM, itemKey, item);
         return item;
     }
