@@ -15,26 +15,23 @@
 	"icon": "assets/crystalline/icon.png",
 	"environment": "*",
 	"entrypoints": {
-		"main": [
-          "net.farzad.crystalline.common.Crystalline"
-		],
-		"fabric-datagen": [
-			"net.farzad.crystalline.CrystallineDataGenerator"
-		],
-		"client": [
-          "net.farzad.crystalline.client.CrystallineClient"
-		]
+      "main": [
+        "net.farzad.crystalline.common.Crystalline"
+      ],
+      "fabric-datagen": [
+        "net.farzad.crystalline.CrystallineDataGenerator"
+      ],
+      "client": [
+        "net.farzad.crystalline.client.CrystallineClient"
+      ]
 	},
 	"mixins": [
 		"crystalline.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.16.14",
-		"minecraft": "~1.21.5",
+		"fabricloader": ">=0.19.2",
+		"minecraft": "~1.21.11",
 		"java": ">=21",
 		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }

@@ -3,6 +3,10 @@
     {
       "id": "crystalline:amethyst_shard",
       "required": false
+    },
+    {
+      "id": "crystalline:strong_amethyst_shard",
+      "required": false
     }
   ]
 }

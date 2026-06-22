@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "a": "minecraft:amethyst_block",
+    "g": "minecraft:glowstone_dust",
+    "t": "minecraft:torch"
+  },
+  "pattern": [
+    "aaa",
+    "aga",
+    "ata"
+  ],
+  "result": {
+    "count": 4,
+    "id": "crystalline:amethyst_lamp"
+  }
+}

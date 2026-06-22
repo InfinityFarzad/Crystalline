@@ -1,53 +1,50 @@
 package net.farzad.crystalline.client.render.entity;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.farzad.crystalline.common.Crystalline;
-import net.farzad.crystalline.common.entity.custom.AmethystShardProjectileEntity;
-import net.minecraft.client.item.ItemModelManager;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.ProjectileEntityRenderer;
-import net.minecraft.client.render.entity.state.ProjectileEntityRenderState;
-import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.RotationAxis;
+import net.farzad.crystalline.common.entity.AmethystShardProjectileEntity;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.entity.ArrowRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.ArrowRenderState;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
 
-public class AmethystShardProjectileEntityRenderer extends ProjectileEntityRenderer<AmethystShardProjectileEntity, ProjectileEntityRenderState> {
-    protected AmethystShardProjectileEntityModel model;
-    protected Identifier TEXTURE = Identifier.of(Crystalline.MOD_ID,"textures/entity/amethyst_shard/amethyst_shard_projectile_entity.png");
+public class AmethystShardProjectileEntityRenderer extends ArrowRenderer<AmethystShardProjectileEntity, ArrowRenderState> {
+    protected final AmethystShardProjectileEntityModel model;
+    protected final Identifier TEXTURE = Crystalline.id("textures/entity/amethyst_shard/amethyst_shard_projectile_entity.png");
 
-
-    public AmethystShardProjectileEntityRenderer(EntityRendererFactory.Context ctx) {
+    public AmethystShardProjectileEntityRenderer(EntityRendererProvider.Context ctx) {
         super(ctx);
-        this.model = new AmethystShardProjectileEntityModel(ctx.getPart(AmethystShardProjectileEntityModel.AMETHYST_SHARD_PROJECTILE));
-
+        this.model = new AmethystShardProjectileEntityModel(ctx.bakeLayer(AmethystShardProjectileEntityModel.AMETHYST_SHARD_PROJECTILE));
     }
 
     @Override
-    public ProjectileEntityRenderState createRenderState() {
-        return new ProjectileEntityRenderState();
+    public ArrowRenderState createRenderState() {
+        return new ArrowRenderState();
     }
 
     @Override
-    public void render(ProjectileEntityRenderState state, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-        matrices.push();
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(state.yaw - 90.0F));
-        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(state.pitch));
-        VertexConsumer vertexconsumer = ItemRenderer.getItemGlintConsumer(vertexConsumers, this.model.getLayer(TEXTURE), false, false);
+    public void submit(ArrowRenderState state, PoseStack matrices, SubmitNodeCollector queue, CameraRenderState cameraRenderState) {
+        matrices.pushPose();
+        matrices.mulPose(Axis.YP.rotationDegrees(state.yRot - 90.0F));
+        matrices.mulPose(Axis.ZP.rotationDegrees(state.xRot));
         this.model.setAngles(state);
-        this.model.render(matrices, vertexconsumer, light, OverlayTexture.DEFAULT_UV);
-        matrices.pop();
+        queue.submitModel(this.model, state, matrices, RenderTypes.entityCutoutNoCull(TEXTURE), (int) (state.lightCoords + Mth.sin(state.ageInTicks)), OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+        matrices.popPose();
     }
 
     @Override
-    protected Identifier getTexture(ProjectileEntityRenderState state) {
+    protected Identifier getTextureLocation(ArrowRenderState state) {
         return TEXTURE;
     }
 
     @Override
-    public void updateRenderState(AmethystShardProjectileEntity entity, ProjectileEntityRenderState state, float tickProgress) {
-        super.updateRenderState(entity, state, tickProgress);
+    public void extractRenderState(AmethystShardProjectileEntity entity, ArrowRenderState state, float tickProgress) {
+        super.extractRenderState(entity, state, tickProgress);
     }
 }

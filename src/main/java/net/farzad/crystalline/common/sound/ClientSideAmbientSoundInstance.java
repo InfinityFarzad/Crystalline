@@ -1,37 +1,35 @@
 package net.farzad.crystalline.common.sound;
 
-import net.farzad.crystalline.common.item.ModItems;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.sound.MovingSoundInstance;
-import net.minecraft.client.sound.SoundInstance;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
+import net.farzad.crystalline.common.init.CrystallineItems;
+import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.Set;
 
-public class ClientSideAmbientSoundInstance extends MovingSoundInstance {
+public class ClientSideAmbientSoundInstance extends AbstractTickableSoundInstance {
     private final Entity entity;
 
-    public ClientSideAmbientSoundInstance(SoundEvent soundEvent, SoundCategory soundCategory, Entity entity) {
-        super(soundEvent, soundCategory, SoundInstance.createRandom());
-        this.repeat = false;
+    public ClientSideAmbientSoundInstance(SoundEvent soundEvent, SoundSource soundCategory, Entity entity) {
+        super(soundEvent, soundCategory, SoundInstance.createUnseededRandom());
+        this.looping = false;
         this.entity = entity;
-        this.repeatDelay = 2;
+        this.delay = 2;
     }
 
     @Override
     public void tick() {
         if (entity.isRemoved()) {
-            this.setDone();
+            this.stop();
         } else {
             this.setPositionToEntity();
-            if (entity instanceof PlayerEntity player && !player.getInventory().containsAny(Set.of(ModItems.CRYSTAL_HEART))) {
-                this.setDone();
+            if (entity instanceof Player player && !player.getInventory().hasAnyOf(Set.of(CrystallineItems.CRYSTAL_HEART))) {
+                this.stop();
             }
         }
-
     }
 
     private void setPositionToEntity() {
@@ -42,12 +40,7 @@ public class ClientSideAmbientSoundInstance extends MovingSoundInstance {
         }
     }
 
-    @Override
-    public boolean shouldAlwaysPlay() {
-        return false;
-    }
-
-    public static ClientSideAmbientSoundInstance createSoundInstance(SoundEvent sound, SoundCategory soundCategory, Entity entity) {
-        return new ClientSideAmbientSoundInstance(sound,soundCategory,entity);
+    public static ClientSideAmbientSoundInstance createSoundInstance(SoundEvent sound, SoundSource soundCategory, Entity entity) {
+        return new ClientSideAmbientSoundInstance(sound, soundCategory, entity);
     }
 }

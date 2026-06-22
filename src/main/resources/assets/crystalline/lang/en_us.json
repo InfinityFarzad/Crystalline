@@ -1,6 +1,6 @@
 {
-  "item.crystalline.divider": "The Divider",
-  "item.crystalline.crusher": "The Crusher",
+  "item.crystalline.divider": "Divider",
+  "item.crystalline.crusher": "Crusher",
   "item.crystalline.crystal_heart": "Crystal Heart",
   "item.crystalline.crystal_core": "Crystal Core",
   "enchantment.crystalline.amethyst_rain": "Amethyst Rain",
@@ -8,6 +8,8 @@
   "enchantment.crystalline.gravitate": "Gravitate",
   "death.attack.amethyst_shard": "%1$s was struck in the chest",
   "death.attack.amethyst_shard.player": "%1$s was struck in the chest by %2$s",
+  "death.attack.strong_amethyst_shard": "%1$s was struck in the chest",
+  "death.attack.strong_amethyst_shard.player": "%1$s was struck in the chest by %2$s",
   "enchantment.crystalline.amethyst_rain.desc":"When at full charge, releases a giant sphere wave of amethyst shards in all directions",
   "enchantment.crystalline.shatter_sweep.desc":"Replaces the 1 shard with a sweep wave of shards",
   "enchantment.crystalline.gravitate.desc":"Makes entities gravitate towards you when you smash them",
@@ -15,12 +17,17 @@
   "block.crystalline.amethyst_brick_slab": "Amethyst Brick Slab",
   "block.crystalline.amethyst_brick_stairs": "Amethyst Brick Stairs",
   "block.crystalline.amethyst_brick_wall": "Amethyst Brick Wall",
-  "block.crystalline.amethyst_brick_pressure_plate": "Amethyst Brick Pressure Plate",
-  "block.crystalline.amethyst_brick_button": "Amethyst Brick Button",
   "block.crystalline.amethyst_pillar": "Amethyst Pillar",
   "block.crystalline.amethyst_lamp": "Amethyst Lamp",
   "tooltip.crystalline.divider_attack": "[ %s ] a entity to charge the divider",
-  "tooltip.crystalline.divider_shoot": "[ %s ] to shoot a crystal",
+  "tooltip.crystalline.divider_shoot": "Insert a [ %s ] into the divider to change its ability",
+  "tooltip.crystalline.show_expl": "Hold [ %s ] to show explanation",
+  "tooltip.crystalline.divider_shoot_cc": "[ %s ] to summon a core that spews crystals",
+  "tooltip.crystalline.divider_shoot_ch": "[ %s ] to grow crystals within you and shoot them out in bursts",
+  "tooltip.crystalline.divider_shoot_hots": "[ %s ] to shoot a crystal wave",
+  "tooltip.crystalline.current_divider_heart": "Current divider heart [ %s ]",
+
+
   "tooltip.crystalline.crusher_attack": "[ %s ] a entity while falling to release a scatter of crystals",
   "itemgroup.crystalline_group": "Crystalline"
 }

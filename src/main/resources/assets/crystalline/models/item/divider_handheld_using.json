@@ -3,7 +3,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "item/handheld",
 	"textures": {
-		"layer0": "crystalline:item/divider_handheld"
+		"layer0": "crystalline:item/divider_crystal_heart_handheld"
 	},
 	"display": {
 		"thirdperson_righthand": {

@@ -32,8 +32,17 @@
             {
               "when": "crystal_heart",
               "model": {
-                "type": "minecraft:model",
-                "model": "crystalline:item/divider_crystal_heart_handheld"
+                "type": "minecraft:condition",
+                "model": "crystalline:item/divider_crystal_heart_handheld",
+                "property": "minecraft:using_item",
+                "on_true": {
+                  "type": "minecraft:model",
+                  "model": "crystalline:item/divider_handheld_using"
+                },
+                "on_false": {
+                  "type": "minecraft:model",
+                  "model": "crystalline:item/divider_crystal_heart_handheld"
+                }
               }
             },
             {
@@ -96,28 +105,28 @@
           "when": "none",
           "model": {
             "type": "minecraft:model",
-            "model": "crystalline:item/divider"
+            "model": "crystalline:item/divider_handheld"
           }
         },
         {
           "when": "crystal_core",
           "model": {
             "type": "minecraft:model",
-            "model": "crystalline:item/divider_crystal_core"
+            "model": "crystalline:item/divider_crystal_core_handheld"
           }
         },
         {
           "when": "crystal_heart",
           "model": {
             "type": "minecraft:model",
-            "model": "crystalline:item/divider_crystal_heart"
+            "model": "crystalline:item/divider_crystal_heart_handheld"
           }
         },
         {
           "when": "heart_of_the_sea",
           "model": {
             "type": "minecraft:model",
-            "model": "crystalline:item/divider_hots"
+            "model": "crystalline:item/divider_hots_handheld"
           }
         }
       ]

@@ -12,8 +12,7 @@
     "requireAnnotations": true
   },
   "client": [
-    "PlayerEntityRendererMixin",
-    "PlayerEntityRenderStateMixin",
-    "PlayerHeldItemFeatureRendererMixin"
+    "client.PlayerEntityRendererMixin",
+    "client.PlayerHeldItemFeatureRendererMixin"
   ]
 }

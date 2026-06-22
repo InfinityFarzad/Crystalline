@@ -4,7 +4,6 @@
     "crystalline:amethyst_pillar",
     "crystalline:amethyst_lamp",
     "crystalline:amethyst_brick_stairs",
-    "crystalline:amethyst_brick_slab",
-    "crystalline:amethyst_brick_pressure_plate"
+    "crystalline:amethyst_brick_slab"
   ]
 }

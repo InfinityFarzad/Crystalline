@@ -8,12 +8,12 @@ public class CrystallineDataGenerator implements DataGeneratorEntrypoint {
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
-        pack.addProvider(ModItemTagProvider::new);
-        pack.addProvider(ModBlockTagProvider::new);
-        pack.addProvider(ModDamageTypeTagProvider::new);
-        pack.addProvider(ModModelProvider::new);
-        pack.addProvider(ModLootTableProvider::new);
+        pack.addProvider(CrystallineItemTagProvider::new);
+        pack.addProvider(CrystallineBlockTagProvider::new);
+        pack.addProvider(CrystallineDamageTypeTagProvider::new);
+        pack.addProvider(CrystallineModelProvider::new);
+        pack.addProvider(CrystallineLootTableProvider::new);
+        pack.addProvider(CrystallineRecipeProvider::new);
 
     }
-
 }

@@ -5,36 +5,38 @@
 package net.farzad.crystalline.client.render.entity;
 
 import net.farzad.crystalline.common.Crystalline;
-import net.minecraft.client.model.*;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.entity.state.ProjectileEntityRenderState;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.entity.state.ArrowRenderState;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.util.Mth;
 
-public class AmethystShardProjectileEntityModel extends EntityModel<ProjectileEntityRenderState> {
-	public static final EntityModelLayer AMETHYST_SHARD_PROJECTILE = new EntityModelLayer(Crystalline.id("amethyst_shard_projectile"), "main");
+public class AmethystShardProjectileEntityModel extends EntityModel<ArrowRenderState> {
+    public static final ModelLayerLocation AMETHYST_SHARD_PROJECTILE = new ModelLayerLocation(Crystalline.id("amethyst_shard_projectile"), "main");
 
-	public AmethystShardProjectileEntityModel(ModelPart root) {
-		super(root, RenderLayer::getEntityCutout);
-	}
-	public static TexturedModelData getTexturedModelData() {
-		ModelData modelData = new ModelData();
-		ModelPartData modelPartData = modelData.getRoot();
-		modelPartData.addChild("back", ModelPartBuilder.create().uv(0, 0).cuboid(-2.0F, -2.0F, -2.0F, 0.0F, 4.0F, 4.0F), ModelTransform.of(-10.0F, 0.0F, 0.0F, ((float)Math.PI / 4F), 0.0F, 0.0F));
-		ModelPartBuilder modelPartBuilder = ModelPartBuilder.create().uv(0, 0).cuboid(-12.0F, -2.0F, 0.0F, 8.0F, 4.0F, 0.0F, Dilation.NONE, 1.0F, 1F);
-		modelPartData.addChild("cross_1", modelPartBuilder, ModelTransform.rotation(((float)Math.PI / 4F), 0.0F, 0.0F));
-		modelPartData.addChild("cross_2", modelPartBuilder, ModelTransform.rotation(2.3561945F, 0.0F, 0.0F));
-		return TexturedModelData.of(modelData, 32, 32);
-	}
+    public AmethystShardProjectileEntityModel(ModelPart root) {
+        super(root, RenderTypes::entityCutoutNoCull);
+    }
 
-	public void setAngles(ProjectileEntityRenderState projectileEntityRenderState) {
-		super.setAngles(projectileEntityRenderState);
-		if (projectileEntityRenderState.shake > 0.0F) {
-			float f = -MathHelper.sin(projectileEntityRenderState.shake * 3.0F) * projectileEntityRenderState.shake;
-			ModelPart var10000 = this.root;
-			var10000.roll += f * ((float)Math.PI / 180F);
-		}
+    public static LayerDefinition getTexturedModelData() {
+        MeshDefinition modelData = new MeshDefinition();
+        PartDefinition modelPartData = modelData.getRoot();
+        modelPartData.addOrReplaceChild("back", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -2.0F, -2.0F, 0.0F, 4.0F, 4.0F), PartPose.offsetAndRotation(-10.0F, 0.0F, 0.0F, ((float) Math.PI / 4F), 0.0F, 0.0F));
+        CubeListBuilder modelPartBuilder = CubeListBuilder.create().texOffs(0, 0).addBox(-12.0F, -2.0F, 0.0F, 8.0F, 4.0F, 0.0F, CubeDeformation.NONE, 1.0F, 1F);
+        modelPartData.addOrReplaceChild("cross_1", modelPartBuilder, PartPose.rotation(((float) Math.PI / 4F), 0.0F, 0.0F));
+        modelPartData.addOrReplaceChild("cross_2", modelPartBuilder, PartPose.rotation(2.3561945F, 0.0F, 0.0F));
+        return LayerDefinition.create(modelData, 32, 32);
+    }
 
-	}
+    public void setAngles(ArrowRenderState projectileEntityRenderState) {
+        super.setupAnim(projectileEntityRenderState);
+        if (projectileEntityRenderState.shake > 0.0F) {
+            float f = -Mth.sin(projectileEntityRenderState.shake * 3.0F) * projectileEntityRenderState.shake;
+            this.root.zRot += f * ((float) Math.PI / 180F);
+        }
+
+    }
 }

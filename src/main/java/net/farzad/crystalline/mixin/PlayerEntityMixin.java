@@ -1,88 +1,55 @@
 package net.farzad.crystalline.mixin;
 
-import net.farzad.crystalline.common.dataComponents.ModDataComponentTypes;
-import net.farzad.crystalline.common.item.ModItems;
-import net.farzad.crystalline.common.item.custom.DividerItem;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
+import net.farzad.crystalline.common.init.CrystallineDataComponentTypes;
+import net.farzad.crystalline.common.item.DividerItem;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.farzad.crystalline.common.item.custom.DividerItem.getCharge;
-import static net.farzad.crystalline.common.item.custom.DividerItem.throwCrystal;
-import static net.farzad.crystalline.common.item.custom.SingleSlotAbilityItem.hasHeart;
+import static net.farzad.crystalline.common.item.DividerItem.getCharge;
+import static net.farzad.crystalline.common.item.DividerItem.throwCrystal;
+import static net.farzad.crystalline.common.item.SingleSlotAbilityItem.hasHeart;
 
-@Mixin(PlayerEntity.class)
-public class PlayerEntityMixin {
+@Mixin(Player.class)
+public abstract class PlayerEntityMixin {
 
-    @Unique
-    private int crystallineTimerDelay = 40;
-
-    @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
-    private void crystalline$addData(NbtCompound nbt, CallbackInfo ci) {
-        nbt.putInt("crystallineTimerDelay",this.crystallineTimerDelay);
-    }
-
-    @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
-    private void crystalline$readData(NbtCompound nbt, CallbackInfo ci) {
-        nbt.getInt("crystallineTimerDelay",this.crystallineTimerDelay);
-    }
-
-    @ModifyArg(method = "spawnSweepAttackParticles", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerWorld;spawnParticles(Lnet/minecraft/particle/ParticleEffect;DDDIDDDD)I"), index = 0)
-    private ParticleEffect crystalline$injectSpawnSweepAttackParticles(ParticleEffect original) {
-        PlayerEntity player = (PlayerEntity) (Object) this;
-        if (player.getWeaponStack().isOf(ModItems.DIVIDER)) {
-            ParticleEffect particleEffect = ParticleTypes.SWEEP_ATTACK;
-            if (particleEffect != null) {
-                return particleEffect;
-            }
-        }
-        return original;
-    }
+    @Shadow
+    public abstract void playSound(SoundEvent soundEvent, float f, float g);
 
     @Inject(method = "tick", at = @At("TAIL"))
-    private void crystalline$enableCrysatalSpread(CallbackInfo ci) {
-        PlayerEntity player = (PlayerEntity) (Object)this;
-        ItemStack stack = player.getMainHandStack();
-        World world = player.getWorld();
-        if (stack.getItem() instanceof DividerItem && stack.getOrDefault(ModDataComponentTypes.DIVIDE_CHARGE,0) >= 2  && hasHeart(DividerItem.DividerAbilityTypes.CRYSTAL_HEART,stack) && player.isUsingItem()) {
-            player.setVelocity(0,0,0);
+    private void crystalline$enableCrystalSpread(CallbackInfo ci) {
+        Player player = (Player) (Object) this;
+        ItemStack stack = player.getMainHandItem();
+        Level world = player.level();
+        if (stack.getItem() instanceof DividerItem && stack.getOrDefault(CrystallineDataComponentTypes.DIVIDE_CHARGE, 0) >= 2 && hasHeart("crystal_heart", stack) && player.isUsingItem()) {
+            player.setDeltaMovement(0, 0, 0);
             player.fallDistance = 0;
-            if (getCharge(stack) >= 2/* && this.crystallineTimerDelay <= 0*/) {
-                if (!world.isClient) {
-//                    for (int yawOffset = value ; yawOffset <= value; yawOffset++) {
-//                        for (int pitchOffset = -2; pitchOffset <= 2; pitchOffset++) {
-//                            float pitch = player.getPitch() + pitchOffset * 20;
-//                            float yaw = player.getYaw() + yawOffset * 20;
-//                            throwCrystal(player, pitch, yaw, world);
-//                        }
-//                    }
+            if (getCharge(stack) >= 2) {
+                if (!world.isClientSide()) {
                     for (int i = 5; i > 0; i--) {
-                        float pitch = player.getPitch() + MathHelper.nextBetween(player.getRandom(),-10.0f,10.0f) * 20;
-                        float yaw = player.getYaw() + MathHelper.nextBetween(player.getRandom(),-10.0f,10.0f) * 20;
-                        throwCrystal(player,pitch,yaw,world,false, player.getPos());
+                        float pitch = player.getXRot() + Mth.randomBetween(player.getRandom(), -10.0f, 10.0f) * 20;
+                        float yaw = player.getYRot() + Mth.randomBetween(player.getRandom(), -10.0f, 10.0f) * 20;
+                        Vec3 crystalPos = new Vec3(player.getX(), player.getY() + 1.2, player.getZ());
+                        world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.PLAYERS, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
+
+                        throwCrystal(player, pitch, yaw, world, false, true, crystalPos);
+                        this.playSound(SoundEvents.AMETHYST_BLOCK_BREAK,1,1);
                     }
-
-
-
-                    crystallineTimerDelay = 40;
                 }
-                this.crystallineTimerDelay--;
 
             }
 
-            DividerItem.setCharge(stack,DividerItem.getCharge(stack) - 1);
-
-
+            DividerItem.setCharge(stack, Math.max(getCharge(stack) - 1, 0));
         }
     }
 
