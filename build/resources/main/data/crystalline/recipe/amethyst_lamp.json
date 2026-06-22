@@ -1,26 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "RVR",
-    "VSV",
-    "AAA"
-  ],
+  "category": "redstone",
   "key": {
-    "A": {
-      "item": "minecraft:amethyst_block"
-    },
-    "S": {
-      "item": "minecraft:redstone_lamp"
-    },
-    "V": {
-      "item": "minecraft:amethyst_shard"
-    },
-    "R": {
-      "item": "minecraft:redstone"
-    }
+    "a": "minecraft:amethyst_block",
+    "g": "minecraft:glowstone_dust",
+    "t": "minecraft:torch"
   },
+  "pattern": [
+    "aaa",
+    "aga",
+    "ata"
+  ],
   "result": {
-    "id": "crystalline:amethyst_lamp",
-    "count": 1
+    "count": 4,
+    "id": "crystalline:amethyst_lamp"
   }
 }

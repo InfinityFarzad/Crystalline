@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/button_pressed",
-  "textures": {
-    "texture": "crystalline:block/amethyst_bricks"
-  }
-}
