@@ -113,11 +113,9 @@ public class DividerItem extends SingleSlotAbilityItem {
                     && target instanceof LivingEntity
                     && !(target instanceof ArmorStand);
             isTryingToCrit = isTryingToCrit && !attacker.isSprinting();
-
-            if (isTryingToCrit && getCharge(stack) < 16 && getCharge(stack) + 2 != 17) {
-                setCharge(stack, getCharge(stack) + 2);
-            } else {
-                setCharge(stack, getCharge(stack) + 1);
+            int charge =  isTryingToCrit ? getCharge(stack) + 2 <= 16 ? 2 : 1 : 1;
+            if (getCharge(stack) + charge <= 16) {
+                setCharge(stack,getCharge(stack) + charge);
             }
         }
         super.hurtEnemy(stack, target, attacker);
@@ -143,30 +141,35 @@ public class DividerItem extends SingleSlotAbilityItem {
             if (getCharge(stack) >= 1) {
                 throwCrystal(user, pitch, yaw, world, false, true, new Vec3(user.getX(), user.getY() + 1.5, user.getZ()));
                 applyUseEffects(user,stack,world);
+                return InteractionResult.PASS;
             }
         } else {
-            if (hasHeart("heart_of_the_sea", stack) && getCharge(stack) >= getHeart(stack).minimumCharge()) {
-                if (!world.isClientSide()) {
-                    for (int i = -4; i < 4; i++) {
-                        throwCrystal(user, pitch, yaw + i * 4, world, true, true, new Vec3(user.getX(), user.getY() + 1.5, user.getZ()));
+            if (hasHeart("heart_of_the_sea", stack)) {
+                if (getCharge(stack) >= getHeart(stack).minimumCharge()) {
+                    if (!world.isClientSide()) {
+                        for (int i = -4; i < 4; i++) {
+                            throwCrystal(user, pitch, yaw + i * 4, world, true, true, new Vec3(user.getX(), user.getY() + 1.5, user.getZ()));
+                        }
                     }
+                    applyUseEffects(user,stack,world);
+                    return InteractionResult.PASS;
                 }
-                applyUseEffects(user,stack,world);
-                return InteractionResult.PASS;
-            } else if (hasHeart("crystal_core", stack) && getCharge(stack) >= getHeart(stack).minimumCharge()) {
-                if (world instanceof ServerLevel serverWorld) {
-                    CrystalCoreEntity entity = new CrystalCoreEntity(CrystallineEntities.CRYSTAL_CORE_ENTITY, user, user.position());
-                    entity.setDeltaMovement(user.getLookAngle().add(entity.getKnownMovement()));
-                    serverWorld.addFreshEntity(entity);
+            } else if (hasHeart("crystal_core", stack)) {
+                if (getCharge(stack) >= getHeart(stack).minimumCharge()) {
+                    if (world instanceof ServerLevel serverWorld) {
+                        CrystalCoreEntity entity = new CrystalCoreEntity(CrystallineEntities.CRYSTAL_CORE_ENTITY, user, user.position());
+                        entity.setDeltaMovement(user.getLookAngle().add(entity.getKnownMovement()));
+                        serverWorld.addFreshEntity(entity);
+                    }
+                    applyUseEffects(user,stack,world);
+                    return InteractionResult.PASS;
                 }
-                applyUseEffects(user,stack,world);
-                return InteractionResult.PASS;
             } else if (hasHeart("crystal_heart", stack) && getCharge(stack) >= 4) {
                 user.startUsingItem(hand);
                 return InteractionResult.PASS;
             }
         }
-        return super.use(world, user, hand);
+        return InteractionResult.FAIL;
     }
 
     private void applyUseEffects(Player user, ItemStack stack, Level level) {

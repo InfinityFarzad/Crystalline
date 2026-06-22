@@ -37,7 +37,7 @@ public class CrystallineItems {
                         entries.accept(CrystallineBlocks.AMETHYST_BRICK_SLAB);
                     }).build());
 
-    public static final Item DIVIDER = register("divider", settings -> new DividerItem(settings, 8, -2.7f, 0.3), new Item.Properties()
+    public static final Item DIVIDER = register("divider", settings -> new DividerItem(settings, 8, -2.8f, 0.2), new Item.Properties()
             .stacksTo(1).rarity(Rarity.RARE)
             .repairable(Items.AMETHYST_SHARD).enchantable(15)
             .component(CrystallineDataComponentTypes.DIVIDE_CHARGE, 0));
